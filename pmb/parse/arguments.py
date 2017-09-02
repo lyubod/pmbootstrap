@@ -168,6 +168,11 @@ def arguments():
     zap.add_argument("-m", "--mismatch-bins", action="store_true", help="also delete"
                      " binary packages that are newer than the corresponding"
                      " package in aports")
+    zap.add_argument("-y", "--assume-yes", help="Assume 'yes' to all"
+                     " question prompts. WARNING: this option will"
+                     " cause normal 'are you sure?' prompts to be"
+                     " disabled!",
+                     action="store_true")
 
     # Action: stats
     stats = sub.add_parser("stats", help="show ccache stats")
@@ -176,6 +181,11 @@ def arguments():
     # Action: build_init / chroot
     build_init = sub.add_parser("build_init", help="initialize build"
                                 " environment (usually you do not need to call this)")
+    build_init.add_argument("-y", "--assume-yes", help="Assume 'yes' to all"
+                            " question prompts. WARNING: this option will"
+                            " cause normal 'are you sure?' prompts to be"
+                            " disabled!",
+                            action="store_true")
     chroot = sub.add_parser("chroot", help="start shell in chroot")
     chroot.add_argument("command", default=["sh"], help="command"
                         " to execute inside the chroot. default: sh", nargs='*')
@@ -214,6 +224,11 @@ def arguments():
                          help="partition to flash from recovery,"
                               "eg. external_sd",
                          dest="recovery_install_partition")
+    install.add_argument("-y", "--assume-yes", help="Assume 'yes' to all"
+                         " question prompts. WARNING: this option will"
+                         " cause normal 'are you sure?' prompts to be"
+                         " disabled!",
+                         action="store_true")
 
     # Action: menuconfig / parse_apkbuild
     menuconfig = sub.add_parser("menuconfig", help="run menuconfig on"
