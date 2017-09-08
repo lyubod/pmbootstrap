@@ -1,6 +1,6 @@
-_hash=8fadcfe750d5905423fec15587e41b56ea46388c
+_hash=1ad02d41da8dd3f01d7333d881c3069e649e7026
 pkgname=tslib
-pkgver=1.13-rc1
+pkgver=1.13-rc2
 pkgrel=0
 pkgdesc="Touchscreen Access Library"
 arch="all"
@@ -24,4 +24,4 @@ package() {
     cd $srcdir/$pkgname-${_hash}
     make DESTDIR="$pkgdir" install
 }
-sha512sums="ed3f755c4d0a5d0654f004550073e8a502abbc41e473092f1aa2c6de320bea09900db1ed1800b7e6a74af70eb760fcacc6c310ac47901ee3f3e591eda117d53f  tslib-1.13-rc1-0.tar.gz"
+sha512sums="acf2a7560b85d78cc687a9d8b7cbff804a31ca01b65b9135a5dc37500feb46168ec96ec4420219efffd1c00a9fafe92916fc832a706a03cb805e15b05de0d07a  tslib-1.13-rc2-0.tar.gz"
