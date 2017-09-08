@@ -311,7 +311,7 @@ start_onscreen_keyboard(){
 		export DFBARGS="$DFBARGS,disable-module=linux_input"
 	fi
 
-	osk-sdl -n root -d "$partition" -c /etc/osk.conf > /osk-sdl.log 2>&1
+	osk-sdl -n root -d "$partition" -c /etc/osk.conf -v > /osk-sdl.log 2>&1
 	unset DFBARGS
 	unset SDL_VIDEO_GL_DRIVER
 	unset TSLIB_TSDEVICE
