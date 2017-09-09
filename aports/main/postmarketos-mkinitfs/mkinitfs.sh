@@ -112,6 +112,7 @@ get_osk_config()
 		/etc/osk.conf
 		/etc/ts.conf
 		/etc/pointercal
+		/etc/fb.modes
 		$fontpath
 	"
 	echo "${ret}"
