@@ -10,7 +10,7 @@ license="LGPL"
 makedepends="zlib-dev freetype-dev libdrm-dev libpng-dev perl tslib tslib-dev autoconf automake libtool"
 depends="libgcc libjpeg libpng freetype libdrm tslib"
 
-subpackages="$pkgname-doc"
+subpackages="$pkgname-doc $pkgname-dev"
 
 source="
     http://sources.webos-ports.org/downloads/DirectFB-$pkgver.tar.gz
