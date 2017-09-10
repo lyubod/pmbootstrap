@@ -297,7 +297,7 @@ start_usb_unlock() {
 
 start_onscreen_keyboard(){
 	# Set up directfb and tslib for osk-sdl
-	export DFBARGS="system=fbdev,no-cursor"
+	export DFBARGS="system=fbdev,no-cursor,linux-input-grab"
 	export SDL_VIDEO_GL_DRIVER="libGL.so.1"
 	# shellcheck disable=SC2154
 	if [ ! -z "$deviceinfo_dev_touchscreen" ]; then
