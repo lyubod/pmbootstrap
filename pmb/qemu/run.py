@@ -70,8 +70,8 @@ def which_spice(args):
     executables = ["remote-viewer", "spicy"]
     for executable in executables:
         if shutil.which(executable):
-            return True, executable
-    return False, ""
+            return executable
+    return None
 
 
 def spice_command(args):
@@ -87,8 +87,8 @@ def spice_command(args):
     if not args.use_spice:
         parameters["enable_spice"] = False
         return parameters, []
-    found_spice, spice_bin = which_spice(args)
-    if not found_spice:
+    spice_binary = which_spice(args)
+    if not spice_binary:
         parameters["enable_spice"] = False
         return parameters, []
     spice_addr = parameters["spice_addr"]
@@ -101,7 +101,7 @@ def spice_command(args):
         ]
     }
     parameters["enable_spice"] = True
-    return parameters, commands[spice_bin]
+    return parameters, commands[spice_binary]
 
 
 def qemu_command(args, arch, device, img_path, config):
@@ -215,7 +215,7 @@ def run(args):
     if not run_spice:
         logging.warning("WARNING: Could not find any SPICE client in your PATH"
                         ", or --spice was not specified, so Qemu will run"
-                        " without some features as 2D acceleration.")
+                        " without some features, such as 2D acceleration.")
     try:
         process = pmb.helpers.run.user(args, command, background=run_spice)
 
