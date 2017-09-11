@@ -206,16 +206,22 @@ def run(args):
     logging.info("Running postmarketOS in QEMU VM (" + arch + ")")
     logging.info("Command: " + " ".join(command))
     print()
-    logging.info("You can connect to the Virtual Machine using the"
+    logging.info("You can connect to the virtual machine using the"
                  " following services:")
     logging.info("(ssh) ssh -p " + str(args.port) + " user@localhost")
     logging.info("(telnet) telnet localhost " + str(args.port + 1))
     logging.info("(telnet debug) telnet localhost " + str(args.port + 2))
 
+    # SPICE related messages
     if not run_spice:
-        logging.warning("WARNING: Could not find any SPICE client in your PATH"
-                        ", or --spice was not specified, so Qemu will run"
-                        " without some features, such as 2D acceleration.")
+        if args.use_spice:
+            logging.warning("WARNING: Could not find any SPICE client (spicy,"
+                            " remote-viewer) in your PATH, starting without"
+                            " SPICE support!")
+        else:
+            logging.info("NOTE: Consider using --spice for potential"
+                         " performance improvements (2d acceleration)")
+
     try:
         process = pmb.helpers.run.user(args, command, background=run_spice)
 
