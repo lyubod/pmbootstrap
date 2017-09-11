@@ -1,6 +1,6 @@
 pkgname=directfb
 pkgver=1.7.7
-pkgrel=6
+pkgrel=7
 
 pkgdesc="Library for hw graphics acceleration, input dev, windowing system on top of the Linux fb device"
 arch="all"
@@ -72,7 +72,6 @@ build() {
 package() {
     cd ${srcdir}/DirectFB-${pkgver}
     make DESTDIR="${pkgdir}" install
-    install -D -m644 fb.modes ${pkgdir}/etc/fb.modes
 }
 sha512sums="c9ce8ffe7d7d17b0351da6a031db7345f31fb7112545f9352834ad33225a93e6284ef0e576ef5fc595bc9060c1756051322fa20f7b5b3444b68d7f05bd1ba494  DirectFB-1.7.7.tar.gz
 d9325c228a534d2d2b93b4dacf896fc12c703b9e08adf1ae8f5baea2a0ed5c4d07d56b8bc63dc605362f093624eab40686b43028ef15a78a01bc10e5f41c16bc  0001-directfb-fix-musl-compile.patch
