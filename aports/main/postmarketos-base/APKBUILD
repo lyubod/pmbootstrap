@@ -1,16 +1,23 @@
 pkgname=postmarketos-base
-pkgver=2
-pkgrel=9
+pkgver=3
+pkgrel=0
 pkgdesc="Meta package for minimal postmarketos base"
 url="https://github.com/postmarketOS"
 arch="noarch"
 license="GPL3+"
 depends="alpine-base haveged cryptsetup wpa_supplicant iw openssh mosh
-tmux htop nano postmarketos-mkinitfs eudev sudo"
+tmux htop nano postmarketos-mkinitfs eudev sudo util-linux"
 makedepends=""
 install="$pkgname.post-install"
 subpackages=""
-source="sudoers firmwareload.sh 50-firmware.rules $install"
+source="
+	sudoers
+	firmwareload.sh
+	50-firmware.rules
+	swapfile/swapfile
+	swapfile/swapfile.init
+	swapfile/swapfile.conf
+	$install"
 options="!check"
 
 package() {
@@ -21,8 +28,19 @@ package() {
 	install -D -m755 "$srcdir"/firmwareload.sh \
 		"$pkgdir"/usr/lib/firmwareload.sh
 
+	# Install swapfile
+	install -Dm755 "$srcdir"/swapfile \
+		"$pkgdir"/sbin/swapfile
+	install -Dm644 "$srcdir"/swapfile.conf \
+		"$pkgdir"/etc/conf.d/swapfile
+	install -Dm755 "$srcdir"/swapfile.init \
+		"$pkgdir"/etc/init.d/swapfile
+
 }
 sha512sums="c6de3b44bc45b9f9c641a7e34c69a481ee39b99ac0251cd28f2b3aae49c1a8d1ca448f4936b7942b1a8b8f7c18a5415c938098765ed8cf08456543800160e64b  sudoers
 38dc75c0ed32b76dccd3d8e7e8173e8b7d91847cf2b07123f376b95af46b4f89798b24f45302a0726fdc1cf253aecaac140f431735ac5c6511553f790badd0af  firmwareload.sh
 0b098828080055d3646ea54891cb0e1b578cbc30f5e16f7284f2814c08192f18079a38fb686d192715ae6a3d2cd6625d9e3cf99f234a6f0d94088bb0cb2ce43d  50-firmware.rules
-b3bf756c5100cc49260d38014faada287bbbba3da4d404f08b76db1b925adc0d30a37e1c37e318f4f698ca353790d715b825cf18fe1bb81a6988976b051530b2  postmarketos-base.post-install"
+995484163b6d789238ce801fd80b827c5ba9d629168cade1ecfd4f4c2c258d09a6bbcf780ecf4c74e9366bb65ea843403bceeafde1f814ad57226c31a3dc1c05  swapfile
+f5cc0f1265955d2646e5f099dd4b5d4c287945bfc18c16044db57670d456f55c678fc11cc59e6dab3fa340832ce869d516302a3a35c13518539ed0cedca51819  swapfile.init
+a28f56f33144b9abdf769231d399bd276cfd7b79ffaf7b450f2c1a01b60bd8157728e1b773cb36780572e8e48baf02a0d13da02d546704f64a760d4877438cd6  swapfile.conf
+05d72e10ddba17a8f4584cd5223d58f53809c42f8ab3ab71fa50bf2a9da390661ed470fe8b8f0296959d23141d8a61b3a233c45db5c3236fbd814115363b0006  postmarketos-base.post-install"
