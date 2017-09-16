@@ -1,0 +1,10 @@
+--- a/src/core/CoreGraphicsStateClient.cpp
++++ b/src/core/CoreGraphicsStateClient.cpp
+@@ -364,6 +364,7 @@ CoreGraphicsStateClient_Init( CoreGraphicsStateClient *client,
+      client->renderer  = NULL;
+      client->requestor = NULL;
+      client->throttle  = NULL;
++     client->gfx_state = NULL;
+ 
+      if (dfb_config->task_manager) {
+           if (dfb_config->call_nodirect) {
