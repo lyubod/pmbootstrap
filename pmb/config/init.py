@@ -140,7 +140,7 @@ def init(args):
 
     logging.info(
         "WARNING: The applications in the chroots do not get updated automatically.")
-    logging.info("Run 'pmbootstrap zap' to delete all chroots once a day before"
+    logging.info("Run 'pmbootstrap.py zap' to delete all chroots once a day before"
                  " working with pmbootstrap!")
     logging.info("It only takes a few seconds, and all packages are cached.")
 
