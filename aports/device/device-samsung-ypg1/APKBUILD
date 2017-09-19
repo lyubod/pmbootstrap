@@ -1,0 +1,32 @@
+pkgname=device-samsung-ypg1
+pkgver=1
+pkgrel=11
+pkgdesc="Samsung Galaxy Player 4.0"
+url="https://github.com/postmarketOS"
+arch="noarch"
+license="MIT"
+depends="linux-samsung-i9100 firmware-samsung-i9100 libsamsung-ipc"
+makedepends=""
+install="$pkgname.post-install"
+subpackages=""
+source="
+	deviceinfo
+	90-android-touch-dev.rules
+	$install
+"
+options="!check"
+
+build() {
+	return 0
+}
+
+package() {
+	install -D -m644 "$srcdir/deviceinfo" \
+		"$pkgdir/etc/deviceinfo"
+	install -D -m644 "$srcdir"/90-android-touch-dev.rules \
+		"$pkgdir"/etc/udev/rules.d/90-android-touch-dev.rules
+}
+
+sha512sums="97504a82ce4c9a8177f7ae7c83ff01262bcd91f707f63ac369f4553f72341cd3b0b813151f28c4873012bb36ac324cf11954d21621df66dc13ad8c904f72b257  deviceinfo
+8aead706ddb118a44de7d049f07d10a27e727d17724058d132e4ec4fa73fed29c9ccfe03f02aca459c922ec0fbba24e171fe3c76e33f7c5462631e3dd5506e36  90-android-touch-dev.rules
+03da52725e676bc7db371cbf4b60bff8689eca469dae96a02ca7d6c194ed9f8c4ec9d19d1ac9212eeba0b73384fd213e86f2b93da94f37e5abe4cc3339281205  device-samsung-ypg1.post-install"
